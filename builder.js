@@ -44,7 +44,6 @@ try {
             const optionRow = document.createElement('div');
             optionRow.className = 'option-row';
             
-            // Ajout de la classe option-label pour afficher "Réponse A", "Réponse B", etc.
             optionRow.innerHTML = `
                 <span class="option-label">Réponse ${OPTION_LETTERS[i]}</span>
                 <input type="radio" name="correct-answer-${index}" id="q${index}-check${i}" ${i === 0 ? 'checked' : ''}>
@@ -124,12 +123,12 @@ try {
             }
 
             function sendTrackingData(status) {
-                const data = {};
-                data['entry.${DEFAULT_ENTRY_ID_QUIZ_TITLE}'] = \`${q.text.replace(/`/g, '\\`')}\`;
-                data['entry.${DEFAULT_ENTRY_ID_STATUS}'] = status;
                 const formData = new URLSearchParams();
-                for (const key in data) formData.append(key, data[key]);
-                fetch('${DEFAULT_FORM_SUBMIT_URL}', { method: 'POST', mode: 'no-cors', body: formData });
+                formData.append('entry.${DEFAULT_ENTRY_ID_QUIZ_TITLE}', \`${q.text.replace(/`/g, '\\`')}\`);
+                formData.append('entry.${DEFAULT_ENTRY_ID_STATUS}', status);
+                
+                // Utilisation de sendBeacon pour forcer le passage à travers les sécurités du navigateur
+                navigator.sendBeacon('${DEFAULT_FORM_SUBMIT_URL}', formData);
             }
 
             function checkAnswer(id) {
