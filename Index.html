@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Quiz</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f0f2f5;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .builder-container {
+            width: 100%;
+            max-width: 700px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            font-size: 24px;
+            color: #0d346d;
+            margin: 0 0 32px 0;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 15px;
+            margin-bottom: 25px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #0d346d;
+            box-shadow: 0 0 0 3px rgba(13, 52, 109, 0.1);
+            outline: none;
+        }
+        .question-block {
+            margin-bottom: 30px;
+        }
+        .option-row {
+            display: flex;
+            align-items: center;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        .option-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #0d346d;
+            min-width: 85px; /* Aligne le début des champs de texte */
+            margin-bottom: 0;
+        }
+        .option-row input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #0d346d;
+            margin: 0;
+        }
+        .option-row input[type="text"] {
+            margin-bottom: 0;
+            flex-grow: 1;
+            background: #fff;
+        }
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #0d346d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+        .generate-btn:hover {
+            background-color: #0a2850;
+        }
+        .result-container {
+            margin-top: 40px;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 15px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 13px;
+            background: #272822;
+            color: #f8f8f2;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="builder-container">
+        <h1>Générateur de Quiz</h1>
+        
+        <form id="quiz-builder-form">
+            <div id="questions-container"></div>
+            
+            <button type="submit" class="generate-btn" id="generate-html-btn">Générer le code HTML</button>
+        </form>
+
+        <div class="result-container">
+            <textarea id="generated-html" readonly></textarea>
+        </div>
+    </div>
+
+    <script src="builder.js"></script>
+</body>
+</html>
